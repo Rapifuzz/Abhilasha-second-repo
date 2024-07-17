@@ -1,36 +1,32 @@
 pipeline {
-  agent any
+    agent any
+    
     environment {
-        PATH = "$PATH:/opt/apache-maven-3.8.2/bin"
+        // Define environment variable for SonarQube token
+        SONARQUBE_TOKEN = credentials('sonarqube')
     }
-  stages {
-    stage('Checkout') {
-      steps {
-        sh 'echo passed'
-        //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
-      }
-    }
-    stage('Build and Test') {
-      steps {
-        sh 'ls -ltr'
-        // build the project and create a JAR file
-        sh 'cd spring-boot-app && mvn clean package'
-      }
-    }
-    stage('Static Code Analysis') {
-      steps {
-	  script {
-        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONARQUBE_TOKEN')]) {
-                        sh """
-                            sonar-scanner \
-                              -Dsonar.projectKey=my_project_key \
-                              -Dsonar.sources=. \
-                              -Dsonar.host.url=http://192.168.3.186:9000 \
-                              -Dsonar.login=${SONARQUBE_TOKEN}
-                        """
+    
+    stages {
+        stage('Build and Test') {
+            steps {
+                // Example build and test steps
+                sh 'echo Building and testing...'
+            }
         }
-		}
-      }
+        
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    // Run SonarQube Scanner with the token
+                    sh """
+                        sonar-scanner \
+                          -Dsonar.projectKey=my_project_key \
+                          -Dsonar.sources=. \
+                          -Dsonar.host.url=http://192.168.3.186:9000 \
+                          -Dsonar.login=${SONARQUBE_TOKEN}
+                    """
+                }
+            }
+        }
     }
-  }
 }
