@@ -16,4 +16,4 @@ stage('Static Code Analysis') {
                 }
             }
         }
-    }
+    
