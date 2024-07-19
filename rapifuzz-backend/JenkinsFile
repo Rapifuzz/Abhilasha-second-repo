@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+           steps {
+		git branch: 'master', url: 'https://github.com/rapifuzzorg/rapifuzz-backend.git'
+      }
+        }
+stage('Static Code Analysis') {
+      steps {
+          script {
+        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONARQUBE_TOKEN')]) {
+                        sh """
+                            sonar-scanner \
+                              -Dsonar.projectKey=my_project_key \
+                              -Dsonar.sources=. \
+                              -Dsonar.host.url=http://192.168.3.186:9000 \
+                              -Dsonar.login=${SONARQUBE_TOKEN}
+                        """
+                        }
+                    }
+                }
+            }
+        }
+    }

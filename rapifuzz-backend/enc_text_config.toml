@@ -1,0 +1,559 @@
+version = 1
+disable_existing_loggers = true
+
+
+[filters.require_debug_false]
+class ="django.utils.log.RequireDebugFalse"
+
+[filters.require_debug_true]
+class = "django.utils.log.RequireDebugTrue"
+
+[filters.customF]
+class = "fuzzer.components.customlog.ContextFilter" 
+
+
+
+
+[formatters.simple]
+format = "[%(asctime)s] %(levelname)s (%(module)s.%(funcName)s:%(lineno)d):-%(message)s]"
+datefmt = "%Y-%m-%d %H:%M:%S %Z%z"
+
+[formatters.verbose]
+format = "[%(asctime)s] %(levelname)s (%(module)s.%(funcName)s:%(lineno)d):-%(message)s]"
+datefmt = "%Y-%m-%d %H:%M:%S %Z%z"
+
+[formatters."verbose server"]
+format = "[%(ip)s [User:%(user)s][%(asctime)s] %(levelname)s (%(module)s.%(funcName)s:%(lineno)d):-%(message)s]"
+datefmt = "%Y-%m-%d %H:%M:%S %Z%z"
+
+
+[handlers.console]
+level = "DEBUG"
+formatter = "simple"
+filters = ["require_debug_true"]
+class = "logging.StreamHandler"
+
+# ... Other handlers ...
+
+[handlers.file2]
+class = "fuzzer.components.customlog.EncryptFileHandler"  # Replace 'your_module' with the actual module name
+filename = "logs/migration_logs/migration.log"
+level = "DEBUG"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.file2_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/migration_logs/migration.log"
+level = "DEBUG"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.file3]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/access_logs/access_logs.log"
+level = "INFO"
+formatter = "verbose server"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+#unencrypted_ lofgs
+[handlers.file3_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/access_logs/access_logs.log"
+level = "INFO"
+formatter = "verbose server"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.sentinel_license]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filters=[]
+filename = "logs/license_logs/sentinel_license.log"
+level = "DEBUG"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+
+ #unencrypted_ lofgs
+[handlers.sentinel_license_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filters=[]
+filename = "rawlogs/license_logs/sentinel_license.log"
+level = "DEBUG"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.viewsHandler]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/server_logs/server_log.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+
+#unencrypted_ lofgs
+[handlers.viewsHandler_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/server_logs/server_log.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.a1Handler]
+class ="fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/module_logs/A1_logs/module_log_a1.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+
+[handlers.a1Handler_unencrypted]
+class ="fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/module_logs/A1_logs/module_log_a1.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+
+[handlers.a2Handler]
+class ="fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/module_logs/A2_logs/module_log_a2.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.a2Handler_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/module_logs/A2_logs/module_log_a2.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.a3Handler]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/module_logs/A3_logs/module_log_a3.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.a3Handler_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/module_logs/A3_logs/module_log_a3.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.a4Handler]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/module_logs/A4_logs/module_log_a4.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.a4Handler_unecrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/module_logs/A4_logs/module_log_a4.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.a5Handler]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/module_logs/A5_logs/module_log_a5.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+
+[handlers.a5Handler_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "logs/module_logs/A5_logs/module_log_a5.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+
+[handlers.a7Handler]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/module_logs/A7_logs/module_log_a7.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+
+[handlers.a7Handler_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/module_logs/A7_logs/module_log_a7.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.a8Handler]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/module_logs/A8_logs/module_log_a8.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.a8Handler_unecrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/module_logs/A8_logs/module_log_a8.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.BPHandler]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/module_logs/BP_logs/module_log_bestpractices.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.BPHandler_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/module_logs/BP_logs/module_log_bestpractices.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+
+[handlers.oasHandler]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/server_logs/server_logs_oas.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.oasHandler_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/server_logs/server_logs_oas.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+
+[handlers.insomniaHandler]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/server_logs/server_logs_testrestapi.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.insomniaHandler_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/server_logs/server_logs_testrestapi.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+
+[handlers.combinedHandler]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/server_logs/server_logs_combineddjango.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.combinedHandler_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/server_logs/server_logs_combineddjango.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.restsoapdiffHandler]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/server_logs/server_logs_differencebtwrestsoap.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.restsoapdiffHandler_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/server_logs/server_logs_differencebtwrestsoap.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+
+
+[handlers.mitmreport]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/server_logs/server_logs_mitmreport.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.mitmreport_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/server_logs/server_logs_mitmreport.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.soap]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/server_logs/server_logs_soap.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.soap_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/server_logs/server_logs_soap.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+
+[handlers.postman]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/server_logs/postman_collection_logs.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.postman_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/server_logs/postman_collection_logs.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.rbac]
+class = "fuzzer.components.customlog.EncryptFileHandler"  
+filename = "logs/server_logs/rbac_logs.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.rbac_unencrypted]
+class = "fuzzer.components.customlog.MyFileHandler"  
+filename = "rawlogs/server_logs/rbac_logs.log"
+level = "INFO"
+formatter = "verbose"
+backupCount = 30
+when = "midnight"
+encoding = "utf-8"
+utc = true
+
+[handlers.null]
+class = "logging.NullHandler"  
+
+[handlers.mail_admins]
+class = "django.utils.log.AdminEmailHandler"  
+filters =['require_debug_false']
+level = "INFO"
+
+
+
+[loggers.django]
+handlers = ["console"]
+propagate = true
+
+
+[loggers.api_fuzzer]
+handlers = ["file3", "file3_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+
+[loggers.api_fuzzer_a1_logger]
+handlers = ["a1Handler", "a1Handler_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+
+[loggers.api_fuzzer_a2_logger]
+handlers = ["a2Handler", "a2Handler_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+[loggers.api_fuzzer_a3_logger]
+handlers = ["a3Handler", "a3Handler_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+
+[loggers.api_fuzzer_a4_logger]
+handlers = ["a4Handler", "a4Handler_unecrypted"]
+propagate = false
+level = "DEBUG"
+
+[loggers.api_fuzzer_a5_logger]
+handlers = ["a5Handler","a5Handler_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+
+[loggers.api_fuzzer_server_logger]
+handlers = ["viewsHandler", "viewsHandler_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+
+[loggers.api_fuzzer_license_logger]
+handlers = ["sentinel_license", "sentinel_license_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+[loggers.api_fuzzer_a7_logger]
+handlers = ["a7Handler", "a7Handler_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+[loggers.api_fuzzer_a8_logger]
+handlers = ["a8Handler", "a8Handler_unecrypted"]
+propagate = false
+level = "DEBUG"
+
+[loggers.api_fuzzer_oas_logger]
+handlers = ["oasHandler", "oasHandler_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+[loggers.api_fuzzer_insomnia_logger]
+handlers = ["insomniaHandler", "insomniaHandler_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+[loggers.api_fuzzer_combined_logger]
+handlers = ["combinedHandler", "combinedHandler_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+[loggers.api_fuzzer_mitmreport_logger]
+handlers = ["mitmreport", "console","mitmreport_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+[loggers.api_fuzzer_soap_logger]
+handlers = ["soap", "console","soap_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+[loggers.api_fuzzer_postman_logger]
+handlers = ["postman", "console","postman_unencrypted"]
+propagate = false
+level = "DEBUG"
+
+[loggers.api_fuzzer_rbac_logger]
+handlers = ["rbac", "console","rbac_unencrypted"]
+propagate = false
+level = "DEBUG"
