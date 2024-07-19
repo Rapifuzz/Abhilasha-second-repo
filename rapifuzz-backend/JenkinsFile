@@ -1,11 +1,5 @@
 pipeline {
     agent any
-    stages {
-        stage('Checkout') {
-           steps {
-		git branch: 'master', url: 'https://github.com/Rapifuzz/Abhilasha-second-repo.git'
-      }
-        }
 stage('Static Code Analysis') {
       steps {
           script {
