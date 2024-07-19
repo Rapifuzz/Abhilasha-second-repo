@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
            steps {
-		git branch: 'master', url: 'https://github.com/rapifuzzorg/rapifuzz-backend.git'
+		git branch: 'master', url: 'https://github.com/Rapifuzz/Abhilasha-second-repo.git'
       }
         }
 stage('Static Code Analysis') {
